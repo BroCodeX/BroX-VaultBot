@@ -140,3 +140,14 @@ tasks.checkstyleTest {
 		html.required.set(true)
 	}
 }
+
+if(System.getenv("SPRING_PROFILES_ACTIVE") != null
+	&& System.getenv("SPRING_PROFILES_ACTIVE").equals("prod")) {
+	sentry {
+		includeSourceContext = true
+
+		org = "brocodex"
+		projectName = "java-spring-boot"
+		authToken = System.getenv("SENTRY_AUTH_TOKEN")
+	}
+}

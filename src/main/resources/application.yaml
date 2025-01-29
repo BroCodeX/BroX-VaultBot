@@ -1,1 +1,27 @@
-spring.application.name=BroxVault
+spring:
+  rabbitmq:
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASS}
+  application:
+    name: fbot
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    default: "dev"
+
+server:
+  port: ${APP_PORT}
+
+logging:
+  level:
+    org:
+      springframework:
+        amqp: DEBUG
+    root: DEBUG
+
+telegram:
+  bot:
+    token: ${BOT_TOKEN}
