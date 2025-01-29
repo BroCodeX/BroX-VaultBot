@@ -1,4 +1,4 @@
-package Brocodex.BroxVault.dto;
+package Brocodex.BroxVault.dto.mq;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -6,21 +6,21 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 
 @Setter
 @Getter
-public class UserDTO {
-    private Long id;
+public class MessageDTO {
     @NotNull
     @Size(max = 256)
-    private Long telegramId;
+    private Long userId;
+    private Long chatId;
 
     @NotBlank
     @Size(max = 100)
     private String userName;
-
     private String firstName;
     private String LastName;
-    private LocalDate createdAt;
+
+    @NotBlank
+    private String message;
 }

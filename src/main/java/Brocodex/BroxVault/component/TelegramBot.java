@@ -1,5 +1,8 @@
 package Brocodex.BroxVault.component;
 
+import Brocodex.BroxVault.constants.RoutingKeys;
+import Brocodex.BroxVault.dto.mq.MessageDTO;
+import Brocodex.BroxVault.service.MQ.MessageProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,14 +19,35 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
     private String token;
 
+    private final MessageProducer producer;
+
     @Autowired
-    public TelegramBot(@Value("${telegram.bot.token}") String token) {
+    public TelegramBot(@Value("${telegram.bot.token}") String token, MessageProducer producer) {
         this.token = token;
+        this.producer = producer;
     }
 
     @Override
     public void consume(Update update) {
-
+        MessageDTO messageDTO = new MessageDTO();
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            messageDTO.setUserId(update.getMessage().getFrom().getId());
+            messageDTO.setChatId(update.getMessage().getChatId());
+            messageDTO.setUserName(update.getMessage().getFrom().getUserName());
+            messageDTO.setFirstName(update.getMessage().getFrom().getFirstName());
+            messageDTO.setLastName(update.getMessage().getFrom().getLastName());
+            messageDTO.setMessage(update.getMessage().getText());
+            producer.sendMessage(messageDTO, RoutingKeys.DIRECT_MESSAGE);
+        }
+        if (update.hasCallbackQuery()) {
+            messageDTO.setUserId(update.getCallbackQuery().getFrom().getId());
+            messageDTO.setChatId(update.getCallbackQuery().getMessage().getChatId());
+            messageDTO.setUserName(update.getCallbackQuery().getFrom().getUserName());
+            messageDTO.setFirstName(update.getCallbackQuery().getFrom().getFirstName());
+            messageDTO.setLastName(update.getCallbackQuery().getFrom().getLastName());
+            messageDTO.setMessage(update.getCallbackQuery().getData());
+            producer.sendMessage(messageDTO, RoutingKeys.VAULT_MESSAGE);
+        }
     }
 
     @Override

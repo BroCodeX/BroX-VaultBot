@@ -1,6 +1,6 @@
 package Brocodex.BroxVault.mapper;
 
-import Brocodex.BroxVault.dto.UserDTO;
+import Brocodex.BroxVault.dto.mq.MessageDTO;
 import Brocodex.BroxVault.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -14,6 +14,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.WARN
 )
 public abstract class UserMapper {
-    public abstract UserDTO map(User user);
-    public abstract User map(UserDTO dto);
+    public abstract MessageDTO map(User user);
+    public abstract User map(MessageDTO dto);
 }

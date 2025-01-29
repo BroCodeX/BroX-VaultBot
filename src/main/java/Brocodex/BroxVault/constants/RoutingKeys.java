@@ -4,11 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum RoutingKeys {
-    USER_CREATE("users.create"),
-    VAULT_CREATE("vault.create"),
-    VAULT_UPDATE("vault.update"),
-    VAULT_DELETE("vault.delete"),
-    VAULT_GET("vault.get");
+    DIRECT_MESSAGE("direct.message"),
+    VAULT_MESSAGE("vault.message");
+//    VAULT_CREATE("vault.create"),
+//    VAULT_UPDATE("vault.update"),
+//    VAULT_DELETE("vault.delete"),
+//    VAULT_GET("vault.get");
 
     private String key;
 

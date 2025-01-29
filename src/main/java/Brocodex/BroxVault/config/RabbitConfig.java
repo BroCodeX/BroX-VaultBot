@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
-    public String userQueue = "user_queue";
+    public String directQueue = "direct_queue";
     public String vaultQueue = "vault_queue";
-    public String exchangeName = "vault_exchange";
+    public static String exchangeName = "vault_exchange";
 
     @Bean
     public MessageConverter jsonMessageConverter() {
@@ -36,8 +36,8 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Queue userQueue() {
-        return new Queue(userQueue, true);
+    public Queue directQueue() {
+        return new Queue(directQueue, true);
     }
 
     @Bean
@@ -46,8 +46,8 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Binding userBinding(@Qualifier("userQueue") Queue queue, TopicExchange topicExchange) {
-        return BindingBuilder.bind(queue).to(topicExchange).with("users.#");
+    public Binding userBinding(@Qualifier("directQueue") Queue queue, TopicExchange topicExchange) {
+        return BindingBuilder.bind(queue).to(topicExchange).with("direct.#");
     }
 
     @Bean
