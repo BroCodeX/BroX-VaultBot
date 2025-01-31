@@ -23,7 +23,7 @@ public class Menu implements Command {
         return SendMessage.builder()
                 .chatId(dto.getChatId())
                 .replyMarkup(keyboard)
-                .text("Please choose the following option:\n")
+                .text(text)
                 .build();
     }
 }

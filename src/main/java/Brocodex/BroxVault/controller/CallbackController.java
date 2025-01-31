@@ -10,13 +10,13 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 import java.util.Map;
 
 @Component
-public class ResponseController {
+public class CallbackController {
     @Setter
     private TelegramClient client;
 
     private Map<String, Command> commandMap;
 
-    public ResponseController() {
+    public CallbackController() {
 
     }
 
