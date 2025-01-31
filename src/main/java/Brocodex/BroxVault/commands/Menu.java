@@ -19,7 +19,13 @@ public class Menu implements Command {
 
     public SendMessage greeting(MessageDTO dto) {
         var keyboard = KeyboardFactory.getVaultOperaitons();
-        String text = String.format("Hello %s, please choose an option below", dto.getUserName());
+        String text = String.format("""
+                Hello %s!
+                ===
+                This is a Hashicorp's Vault Bot.
+                You can save, get, delete or update
+                your credentials using the commands below.
+                """, dto.getFirstName());
         return SendMessage.builder()
                 .chatId(dto.getChatId())
                 .replyMarkup(keyboard)

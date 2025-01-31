@@ -18,10 +18,10 @@ public class UserService {
     private Menu menuCommand;
 
     public SendMessage userEntrypoint(MessageDTO dto) {
-        var maybeUser = repository.findByTelegramId(dto.getUserId());
+        var maybeUser = repository.findByTelegramId(dto.getTelegramId());
         if (maybeUser.isEmpty()) {
             return createUser(dto);
-        } else if(maybeUser.isPresent() && !maybeUser.get().isActive()) {
+        } else if(!maybeUser.get().isActive()) {
             return SendMessage.builder()
                     .chatId(dto.getChatId())
                     .text("Your user is inactive inside the Vault.\n" +
@@ -39,13 +39,13 @@ public class UserService {
     }
 
     public SendMessage deleteUser(MessageDTO dto) {
-        if (!repository.existsByTelegramId(dto.getUserId())) {
+        if (!repository.existsByTelegramId(dto.getTelegramId())) {
             return notFoundMessage(dto);
         }
-        repository.deleteByTelegramId(dto.getUserId());
+        repository.deleteByTelegramId(dto.getTelegramId());
         return SendMessage.builder()
                 .chatId(dto.getChatId())
-                .text("User with " + dto.getUserId() + " deleted")
+                .text("User with " + dto.getTelegramId() + " deleted")
                 .build();
     }
 

@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MessageDTO {
     @NotNull
     @Size(max = 256)
-    private Long userId;
+    private Long telegramId;
     private Long chatId;
 
     @NotBlank
@@ -21,6 +21,5 @@ public class MessageDTO {
     private String firstName;
     private String LastName;
 
-    @NotBlank
     private String message;
 }

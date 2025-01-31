@@ -23,15 +23,19 @@ public class DirectController {
         this.commandMap = Map.of("/start", start, "/menu", menu);
     }
 
-    public SendMessage handleDirectMessage(MessageDTO dto) {
+    public void handleDirectMessage(MessageDTO dto) {
         if (!commandMap.containsKey(dto.getMessage())) {
-            return SendMessage.builder()
+            var message = SendMessage.builder()
                     .chatId(dto.getChatId())
-                    .text("Something went wrong. Command" + dto.getMessage() + " not found")
+                    .text(String.format("Something went wrong. Command '%s' not found", dto.getMessage()))
                     .build();
+            sendMessage(message);
+        } else {
+            var command = commandMap.get(dto.getMessage());
+            var result = command.apply(dto);
+            sendMessage(result);
         }
-        var command = commandMap.get(dto.getMessage());
-        return command.apply(dto);
+
     }
 
     public void sendMessage(SendMessage message) {

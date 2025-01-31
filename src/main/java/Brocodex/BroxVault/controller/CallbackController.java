@@ -1,6 +1,7 @@
 package Brocodex.BroxVault.controller;
 
 import Brocodex.BroxVault.commands.Command;
+import Brocodex.BroxVault.dto.mq.MessageDTO;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,6 +18,10 @@ public class CallbackController {
     private Map<String, Command> commandMap;
 
     public CallbackController() {
+
+    }
+
+    public void handleCallbackMessage(MessageDTO dto) {
 
     }
 
