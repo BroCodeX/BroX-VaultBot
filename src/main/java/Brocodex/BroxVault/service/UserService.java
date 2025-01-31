@@ -32,14 +32,28 @@ public class UserService {
     }
 
     public SendMessage createUser(MessageDTO dto) {
-        return null;
+        var user = mapper.map(dto);
+        user.setActive(true);
+        repository.save(user);
+        return menuCommand.greeting(dto);
     }
 
     public SendMessage deleteUser(MessageDTO dto) {
-        return null;
+        if (!repository.existsByTelegramId(dto.getUserId())) {
+            return notFoundMessage(dto);
+        }
+        repository.deleteByTelegramId(dto.getUserId());
+        return SendMessage.builder()
+                .chatId(dto.getChatId())
+                .text("User with " + dto.getUserId() + " deleted")
+                .build();
     }
 
-    public SendMessage updateUser(MessageDTO dto) {
-        return null;
+    public SendMessage notFoundMessage(MessageDTO dto) {
+        return SendMessage.builder()
+                .chatId(dto.getChatId())
+                .text("Your user hasn't found in the repo.\n" +
+                        "Please type /start")
+                .build();
     }
 }

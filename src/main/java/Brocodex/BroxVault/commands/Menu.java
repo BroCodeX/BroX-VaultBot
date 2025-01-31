@@ -16,4 +16,14 @@ public class Menu implements Command {
                 .text("Please choose the following option:\n")
                 .build();
     }
+
+    public SendMessage greeting(MessageDTO dto) {
+        var keyboard = KeyboardFactory.getVaultOperaitons();
+        String text = String.format("Hello %s, please choose an option below", dto.getUserName());
+        return SendMessage.builder()
+                .chatId(dto.getChatId())
+                .replyMarkup(keyboard)
+                .text("Please choose the following option:\n")
+                .build();
+    }
 }

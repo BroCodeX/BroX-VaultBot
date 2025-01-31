@@ -1,5 +1,6 @@
 package Brocodex.BroxVault.config;
 
+import lombok.Getter;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -13,10 +14,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Getter
 public class RabbitConfig {
-    public String directQueue = "direct_queue";
-    public String vaultQueue = "vault_queue";
-    public static String exchangeName = "vault_exchange";
+    public static final String directQueue = "direct_queue";
+    public static final String vaultQueue = "vault_queue";
+    public static final String exchangeName = "vault_exchange";
 
     @Bean
     public MessageConverter jsonMessageConverter() {
