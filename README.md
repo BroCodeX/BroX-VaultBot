@@ -1,5 +1,8 @@
 # Telegram Bot for HashiCorp Vault with RabbitMQ
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/98731fcbac73124c516b/maintainability)](https://codeclimate.com/github/BroCodeX/BroX-VaultBot/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/98731fcbac73124c516b/test_coverage)](https://codeclimate.com/github/BroCodeX/BroX-VaultBot/test_coverage)
+
 Telegram-бот на Java Spring для управления чувствительными данными в HashiCorp Vault с использованием RabbitMQ для асинхронной обработки запросов.
 
 ---
