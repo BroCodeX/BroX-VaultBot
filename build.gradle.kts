@@ -60,7 +60,7 @@ dependencies {
 	testImplementation ("org.mockito:mockito-core:4.11.0")
 
 	// Spring AMQP
-	implementation("org.springframework.boot:spring-boot-starter-amqp")
+	implementation("org.springframework.kafka:spring-kafka")
 
 	// Telegram
 	implementation("org.telegram:telegrambots-springboot-longpolling-starter:8.0.0")

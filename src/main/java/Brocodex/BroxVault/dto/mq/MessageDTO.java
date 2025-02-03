@@ -22,4 +22,5 @@ public class MessageDTO {
     private String LastName;
 
     private String message;
+    private String kafkaId;
 }
