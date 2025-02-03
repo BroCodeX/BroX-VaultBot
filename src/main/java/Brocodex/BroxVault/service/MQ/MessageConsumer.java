@@ -14,12 +14,12 @@ public class MessageConsumer {
     @Autowired
     private DirectController directController;
 
-    @KafkaListener(topics = "direct.message", groupId = "direct_group")
+    @KafkaListener(topics = "direct.message", groupId = "vault_group", containerFactory = "groupVaultContainerFactory")
     public void receiveDirectMessages(MessageDTO dto) {
         directController.handleDirectMessage(dto);
     }
 
-    @KafkaListener(topics = "vault.message", groupId = "vault_group")
+    @KafkaListener(topics = "vault.message", groupId = "vault_group", containerFactory = "groupVaultContainerFactory")
     public void receiveVaultMessages(MessageDTO dto) {
         callbackController.handleCallbackMessage(dto);
     }

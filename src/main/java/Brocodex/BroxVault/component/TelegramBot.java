@@ -50,7 +50,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             messageDTO.setFirstName(update.getMessage().getFrom().getFirstName());
             messageDTO.setLastName(update.getMessage().getFrom().getLastName());
             messageDTO.setMessage(update.getMessage().getText());
-            messageDTO.setKafkaId("1");
             producer.sendMessage(TopicKeys.DIRECT_MESSAGE, messageDTO);
         }
         if (update.hasCallbackQuery()) {
@@ -60,7 +59,6 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             messageDTO.setFirstName(update.getCallbackQuery().getFrom().getFirstName());
             messageDTO.setLastName(update.getCallbackQuery().getFrom().getLastName());
             messageDTO.setMessage(update.getCallbackQuery().getData());
-            messageDTO.setKafkaId("1");
             producer.sendMessage(TopicKeys.VAULT_MESSAGE, messageDTO);
         }
     }

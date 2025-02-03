@@ -59,23 +59,4 @@ public class Kafka {
         factory.setConsumerFactory(consumerVaultFactory());
         return factory;
     }
-
-    @Bean
-    public ConsumerFactory<String, MessageDTO> consumerDirectFactory() {
-        Map<String, Object> configs = new HashMap<>();
-        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); // Адреса брокеров
-        configs.put(ConsumerConfig.GROUP_ID_CONFIG, "direct_group"); // Идентификатор группы потребителей
-        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class); // Десериализатор ключа
-        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class); // Десериализатор значения
-        configs.put(JsonDeserializer.TRUSTED_PACKAGES, "*"); // Разрешить все пакеты для десериализации
-        return new DefaultKafkaConsumerFactory<>(configs);
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MessageDTO> groupDirectContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, MessageDTO> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerDirectFactory());
-        return factory;
-    }
 }
