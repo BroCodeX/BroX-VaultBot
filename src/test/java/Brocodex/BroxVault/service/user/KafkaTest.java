@@ -23,11 +23,17 @@ public class KafkaTest {
     @Test
     public void sendMessage() {
         String message = "Yandex test message";
-        String topic = TopicKeys.DIRECT_MESSAGE.getKey();
+        String topicKey = TopicKeys.DIRECT_MESSAGE.getKey();
 
-        var upd = new Update();
-        upd.setMessage(Message.builder().text(message).build());
+//        var upd = new Update();
+//        upd.setMessage(Message.builder().text(message).build());
+        MessageDTO dto = new MessageDTO();
+        dto.setTelegramId(12345L);
+        dto.setChatId(54321L);
+        dto.setUserName("Yandex Name");
+        dto.setMessage("Yandex Message");
 
         // тут надо подумать как протестировать Kafka, что сообщения передаются
+        template.send(topicKey, dto);
     }
 }
