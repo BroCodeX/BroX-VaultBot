@@ -33,5 +33,5 @@ public class User {
     @CreatedDate
     private LocalDate createdAt;
 
-    private boolean isActive;
+    private Boolean isActive;
 }
