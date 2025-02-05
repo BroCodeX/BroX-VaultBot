@@ -58,6 +58,9 @@ dependencies {
 	implementation("org.instancio:instancio-junit:3.3.0")
 	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
 	testImplementation ("org.mockito:mockito-core:4.11.0")
+	testImplementation("org.springframework.kafka:spring-kafka-test")
+	testImplementation("org.awaitility:awaitility:4.2.0")
+
 
 	// Spring AMQP
 	implementation("org.springframework.kafka:spring-kafka")
