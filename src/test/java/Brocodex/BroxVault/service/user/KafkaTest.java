@@ -5,11 +5,14 @@ import Brocodex.BroxVault.controller.DirectController;
 import Brocodex.BroxVault.dto.mq.MessageDTO;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
@@ -30,16 +33,14 @@ public class KafkaTest {
     @Autowired
     private KafkaTemplate<String, MessageDTO> template;
 
-    private final CountDownLatch latch = new CountDownLatch(1);
-
-    private String receivedMessage;
-
-    @Autowired
+    @MockitoBean
     private DirectController directController;
+
+    @Captor
+    private ArgumentCaptor<MessageDTO> dtoCaptor;
 
     @Test
     public void sendMessage() {
-        String message = "Yandex test message";
         String topicKey = TopicKeys.DIRECT_MESSAGE.getKey();
 
         MessageDTO dto = new MessageDTO();
@@ -50,8 +51,6 @@ public class KafkaTest {
 
         template.send(topicKey, dto);
 
-        ArgumentCaptor<MessageDTO> dtoCaptor = ArgumentCaptor.forClass(MessageDTO.class);
-
         await().atMost(10, TimeUnit.SECONDS)
                 .untilAsserted(() -> {
                     verify(directController).handleDirectMessage(dtoCaptor.capture());
@@ -59,9 +58,6 @@ public class KafkaTest {
 
         MessageDTO actualDto = dtoCaptor.getValue();
 
-        assertThat(actualDto.getTelegramId()).isEqualTo(dto.getTelegramId());
-        assertThat(actualDto.getChatId()).isEqualTo(dto.getChatId());
-        assertThat(actualDto.getUserName()).isEqualTo(dto.getUserName());
-        assertThat(actualDto.getMessage()).isEqualTo(dto.getMessage());
+        assertThat(actualDto).usingRecursiveComparison().isEqualTo(dto);
     }
 }
