@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DirectControllerTest {
-    @InjectMocks
     private DirectController directController;
 
     @Mock
@@ -43,6 +42,9 @@ public class DirectControllerTest {
         dto.setChatId(54321L);
         dto.setUserName("Yandex Name");
         dto.setMessage("Yandex Message");
+
+        directController = new DirectController(startCommand, menuCommand);
+        directController.setClient(client);
     }
 
     @Test
