@@ -13,6 +13,7 @@ public class MessageDTO {
     @NotNull
     @Size(max = 256)
     private Long telegramId;
+    @NotNull
     private Long chatId;
 
     @NotBlank
