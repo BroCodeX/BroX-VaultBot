@@ -1,9 +1,9 @@
-# Telegram Bot for HashiCorp Vault with RabbitMQ
+# Telegram Bot for HashiCorp Vault with Kafka
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/98731fcbac73124c516b/maintainability)](https://codeclimate.com/github/BroCodeX/BroX-VaultBot/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/98731fcbac73124c516b/test_coverage)](https://codeclimate.com/github/BroCodeX/BroX-VaultBot/test_coverage)
 
-Telegram-бот на Java Spring для управления чувствительными данными в HashiCorp Vault с использованием RabbitMQ для асинхронной обработки запросов.
+Telegram-бот на Java Spring для управления чувствительными данными в HashiCorp Vault с использованием Spring Kafka для асинхронной обработки запросов.
 
 ---
 
@@ -21,7 +21,7 @@ Telegram-бот на Java Spring для управления чувствите�
 
 ## Описание
 
-Бот позволяет сохранять, обновлять, удалять и получать чувствительные данные (например, пароли) в HashiCorp Vault. RabbitMQ используется для асинхронной обработки запросов.
+Бот позволяет сохранять, обновлять, удалять и получать чувствительные данные (например, пароли) в HashiCorp Vault. Kafka используется для асинхронной обработки запросов.
 
 ---
 
@@ -55,10 +55,11 @@ Telegram-бот на Java Spring для управления чувствите�
 - Spring Boot 3.x
 - TelegramBots
 - Spring Vault
-- RabbitMQ (Spring AMQP)
+- Kafka (Spring-kafka)
 - H2/PostgreSQL
-- Logback/SLF4J
-- Maven/Gradle
+- SLF4J
+- Gradle 8.7
+- Docker Compose
 </details>
 
 ---
