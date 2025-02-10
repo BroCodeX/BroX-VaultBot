@@ -35,7 +35,6 @@ public class DirectController {
             var result = command.apply(dto);
             sendMessage(result);
         }
-
     }
 
     public void sendMessage(SendMessage message) {

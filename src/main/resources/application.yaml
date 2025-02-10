@@ -1,9 +1,4 @@
 spring:
-  rabbitmq:
-    host: ${RABBIT_HOST}
-    port: ${RABBIT_PORT}
-    username: ${RABBIT_USER}
-    password: ${RABBIT_PASS}
   application:
     name: fbot
   output:
@@ -25,3 +20,6 @@ logging:
 telegram:
   bot:
     token: ${BOT_TOKEN}
+
+kafka:
+  bootstrap-servers: ${KAFKA_SERVER}

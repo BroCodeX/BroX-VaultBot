@@ -1,6 +1,6 @@
 package Brocodex.BroxVault.component;
 
-import Brocodex.BroxVault.constants.RoutingKeys;
+import Brocodex.BroxVault.constants.TopicKeys;
 import Brocodex.BroxVault.controller.CallbackController;
 import Brocodex.BroxVault.controller.DirectController;
 import Brocodex.BroxVault.dto.mq.MessageDTO;
@@ -50,7 +50,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             messageDTO.setFirstName(update.getMessage().getFrom().getFirstName());
             messageDTO.setLastName(update.getMessage().getFrom().getLastName());
             messageDTO.setMessage(update.getMessage().getText());
-            producer.sendMessage(messageDTO, RoutingKeys.DIRECT_MESSAGE);
+            producer.sendMessage(TopicKeys.DIRECT_MESSAGE, messageDTO);
         }
         if (update.hasCallbackQuery()) {
             messageDTO.setTelegramId(update.getCallbackQuery().getFrom().getId());
@@ -59,7 +59,7 @@ public class TelegramBot implements SpringLongPollingBot, LongPollingSingleThrea
             messageDTO.setFirstName(update.getCallbackQuery().getFrom().getFirstName());
             messageDTO.setLastName(update.getCallbackQuery().getFrom().getLastName());
             messageDTO.setMessage(update.getCallbackQuery().getData());
-            producer.sendMessage(messageDTO, RoutingKeys.VAULT_MESSAGE);
+            producer.sendMessage(TopicKeys.VAULT_MESSAGE, messageDTO);
         }
     }
 

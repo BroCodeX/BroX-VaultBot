@@ -3,7 +3,7 @@ package Brocodex.BroxVault.constants;
 import lombok.Getter;
 
 @Getter
-public enum RoutingKeys {
+public enum TopicKeys {
     DIRECT_MESSAGE("direct.message"),
     VAULT_MESSAGE("vault.message");
 //    VAULT_CREATE("vault.create"),
@@ -13,7 +13,7 @@ public enum RoutingKeys {
 
     private String key;
 
-    RoutingKeys(String key) {
+    TopicKeys(String key) {
         this.key = key;
     }
 }

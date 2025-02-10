@@ -21,7 +21,7 @@ public class UserService {
         var maybeUser = repository.findByTelegramId(dto.getTelegramId());
         if (maybeUser.isEmpty()) {
             return createUser(dto);
-        } else if(!maybeUser.get().isActive()) {
+        } else if(!maybeUser.get().getIsActive()) {
             return SendMessage.builder()
                     .chatId(dto.getChatId())
                     .text("Your user is inactive inside the Vault.\n" +
@@ -31,14 +31,14 @@ public class UserService {
         return menuCommand.apply(dto);
     }
 
-    public SendMessage createUser(MessageDTO dto) {
+    private SendMessage createUser(MessageDTO dto) {
         var user = mapper.map(dto);
-        user.setActive(true);
+        user.setIsActive(true);
         repository.save(user);
         return menuCommand.greeting(dto);
     }
 
-    public SendMessage deleteUser(MessageDTO dto) {
+    private SendMessage deleteUser(MessageDTO dto) {
         if (!repository.existsByTelegramId(dto.getTelegramId())) {
             return notFoundMessage(dto);
         }
@@ -49,7 +49,7 @@ public class UserService {
                 .build();
     }
 
-    public SendMessage notFoundMessage(MessageDTO dto) {
+    private SendMessage notFoundMessage(MessageDTO dto) {
         return SendMessage.builder()
                 .chatId(dto.getChatId())
                 .text("Your user hasn't found in the repo.\n" +
