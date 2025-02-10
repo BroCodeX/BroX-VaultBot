@@ -50,6 +50,9 @@ services:
       # Для внутренних контейнеров используем INTERNAL-слушатель, так как имя "kafka" разрешается в сети Docker
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+      AUTH_TYPE: "LOGIN_FORM"
+      SPRING_SECURITY_USER_NAME: "${KAFKA_UI_USER}"
+      SPRING_SECURITY_USER_PASSWORD: "${KAFKA_UI_PASS}"
     depends_on:
       - kafka
 
